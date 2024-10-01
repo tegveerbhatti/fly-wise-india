@@ -66,7 +66,3 @@ The machine learning model used for prediction is a Random Forest Regressor trai
 ## License
 
 This project is licensed under the MIT License. See the `LICENSE` file for more details.
-
-
-# fly-wise-india
-# fly-wise-india
