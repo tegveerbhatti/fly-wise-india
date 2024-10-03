@@ -62,7 +62,3 @@ The machine learning model used for prediction is a Random Forest Regressor trai
 - **scikit-learn**: For building and training the machine learning model.
 - **NumPy**: For numerical computations.
 - **Matplotlib**: For visualizing prediction accuracy and model performance.
-
-## License
-
-This project is licensed under the MIT License. See the `LICENSE` file for more details.
