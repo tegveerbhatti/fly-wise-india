@@ -61,3 +61,4 @@ days_left = col4.number_input("Days Left for Flight:", min_value=1, max_value=36
 
 if st.button("Predict Price 💸"):
     predict_price(airline, flight_class, stops, src, dest, arrival_time, departure_time, duration, days_left)
+
