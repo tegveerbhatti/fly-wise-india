@@ -38,26 +38,80 @@ def predict_price(airline, flight_class, stops, src, dest, arrival_time, departu
     price = model.predict(encoded_data_array)
     st.write(f"### The predicted price of the flight is: ₹{price[0]} 🛫")
 
-st.title("FlyWise India 🛩️")
+# Custom CSS for styling
+st.markdown("""
+    <style>
+    .main {
+        background-color: #f0f2f6;
+    }
+    .title {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #4a4e69;
+    }
+    .subtitle {
+        font-size: 1.5rem;
+        color: #22223b;
+    }
+    .highlight {
+        font-weight: bold;
+        color: #9a8c98;
+    }
+    .stButton > button {
+        background-color: #4a4e69;
+        color: white;
+        border-radius: 10px;
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+    .stButton > button:hover {
+        background-color: #22223b;
+    }
+    </style>
+""", unsafe_allow_html=True)
 
-st.write("""### Welcome to FlyWise India 🇮🇳! This app predicts the price 💰 of a flight in India based on various features such as:
-         \n#### - The Airline 🛄
-         \n#### - Source and Destination Cities 🏙️
-         \n#### - Arrival and Departure Times ⏰
-         \n#### - And More 📦""")
-st.write("#### Please fill in the details below to get your flight price prediction.")
+# Title
+st.markdown('<div class="title">FlyWise India 🛩️</div>', unsafe_allow_html=True)
 
-col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
+# Introduction
+st.markdown("""
+    <div class="subtitle">
+        Welcome to <span class="highlight">FlyWise India 🇮🇳</span>! This app predicts the price 💰 of a flight in India based on various features such as:
+        <ul>
+            <li>The Airline 🛄</li>
+            <li>Source and Destination Cities 🏙️</li>
+            <li>Arrival and Departure Times ⏰</li>
+            <li>Number of Stops and More 📦</li>
+        </ul>
+    </div>
+""", unsafe_allow_html=True)
 
-airline = col1.selectbox("Airline:", ['SpiceJet', 'Air_India', 'Vistara', 'GO_FIRST', 'Indigo'])
-flight_class = col2.selectbox("Class:", ['Economy', 'Business'])
-stops = col3.number_input("Number of Stops:", min_value=0, max_value=5, step=1)
-src = col1.selectbox("Source City:", ['Delhi', 'Mumbai', 'Bangalore', 'Kolkata', 'Hyderabad', 'Chennai'])
-dest = col2.selectbox("Destination City:", ['Delhi', 'Mumbai', 'Bangalore', 'Kolkata', 'Hyderabad', 'Chennai'])
-arrival_time = col3.selectbox("Arrival Time:", ['Early_Morning', 'Morning', 'Afternoon', 'Evening', 'Night', 'Late_Night'])
-departure_time = col4.selectbox("Departure Time:", ['Early_Morning', 'Morning', 'Afternoon', 'Evening', 'Night', 'Late_Night'])
-duration = col1.number_input("Duration (in minutes):", min_value=0, max_value=1440, step=1)
-days_left = col4.number_input("Days Left for Flight:", min_value=1, max_value=365, step=1)
+st.markdown("<div class='subtitle'>Fill in the details below to get your flight price prediction:</div>", unsafe_allow_html=True)
 
-if st.button("Predict Price 💸"):
-    predict_price(airline, flight_class, stops, src, dest, arrival_time, departure_time, duration, days_left)
+# Layout improvements with columns
+st.markdown("---")
+col1, col2, col3, col4 = st.columns([1.5, 1.5, 1.5, 1.5])
+
+with col1:
+    airline = st.selectbox("✈️ Airline:", ['SpiceJet', 'Air_India', 'Vistara', 'GO_FIRST', 'Indigo'])
+    src = st.selectbox("🌆 Source City:", ['Delhi', 'Mumbai', 'Bangalore', 'Kolkata', 'Hyderabad', 'Chennai'])
+    duration = st.number_input("🕒 Duration (in minutes):", min_value=0, max_value=1440, step=1)
+
+with col2:
+    flight_class = st.selectbox("🎫 Class:", ['Economy', 'Business'])
+    dest = st.selectbox("🌆 Destination City:", ['Delhi', 'Mumbai', 'Bangalore', 'Kolkata', 'Hyderabad', 'Chennai'])
+    stops = st.number_input("🛑 Number of Stops:", min_value=0, max_value=5, step=1)
+
+with col3:
+    arrival_time = st.selectbox("⏰ Arrival Time:", ['Early_Morning', 'Morning', 'Afternoon', 'Evening', 'Night', 'Late_Night'])
+    days_left = st.number_input("📅 Days Left for Flight:", min_value=1, max_value=365, step=1)
+
+with col4:
+    departure_time = st.selectbox("⏰ Departure Time:", ['Early_Morning', 'Morning', 'Afternoon', 'Evening', 'Night', 'Late_Night'])
+
+# Predict button
+st.markdown("---")
+center_button = st.columns([1, 1, 1])
+with center_button[1]:
+    if st.button("🚀 Predict Price 💸"):
+        predict_price(airline, flight_class, stops, src, dest, arrival_time, departure_time, duration, days_left)
